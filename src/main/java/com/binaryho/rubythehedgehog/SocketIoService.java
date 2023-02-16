@@ -21,6 +21,6 @@ public class SocketIoService {
         SocketIOServer nettySocketIoServer = new SocketIOServer(configuration);
         nettySocketIoServer.start();
 
-        System.out.println("init socket io server!\n" + hostName + portNumber);
+        System.out.println("init socket io server!\n" + hostName + ":" + portNumber);
     }
 }
