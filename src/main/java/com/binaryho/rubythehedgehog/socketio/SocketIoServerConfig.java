@@ -1,26 +1,22 @@
-package com.binaryho.rubythehedgehog;
+package com.binaryho.rubythehedgehog.socketio;
 
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOServer;
-import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.Bean;
 
-@Service
-public class SocketIoService {
+@org.springframework.context.annotation.Configuration
+public class SocketIoServerConfig {
 
     @Value("${socketio-server.host}")private String hostName;
     @Value("${socketio-server.port}") private Integer portNumber;
 
-    @PostConstruct
-    private void initSocketIOServer() {
+    @Bean
+    public SocketIOServer socketIOServer() {
         Configuration configuration = new Configuration();
         configuration.setHostname(hostName);
         configuration.setPort(portNumber);
 
-        SocketIOServer nettySocketIoServer = new SocketIOServer(configuration);
-        nettySocketIoServer.start();
-
-        System.out.println("init socket io server!\n" + hostName + ":" + portNumber);
+        return new SocketIOServer(configuration);
     }
 }
